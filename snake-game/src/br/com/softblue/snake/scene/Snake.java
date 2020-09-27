@@ -38,7 +38,11 @@ public class Snake extends Shape {
 			Rect newHead = duplicateRect(head, direction);
 			getRects().set(0, newHead);
 		}
+		
 	}
+	   public void elongate() {
+		   
+	   }
 
 	public synchronized void left() {
 		if (direction.canChangeTo(Direction.LEFT)) {

@@ -2,6 +2,7 @@ package br.com.softblue.snake.core;
 
 import java.awt.Rectangle;
 
+import br.com.softblue.snake.graphics.Food;
 import br.com.softblue.snake.graphics.Rect;
 import br.com.softblue.snake.graphics.Renderer;
 import br.com.softblue.snake.scene.Background;
@@ -13,11 +14,13 @@ public class Game implements Runnable {
 	private GameWindow gameWindow;
 	private Renderer renderer;
 	private Snake snake;
-
+    private Food food;
+    
 	public void start() {
 		snake = new Snake();
 		gameWindow = new GameWindow(snake);
 		renderer = gameWindow.getRenderer();
+		food=new Food(snake,gameWindow.getDrawingArea());
 		
 		addElementsToScreen();
 		
@@ -27,6 +30,7 @@ public class Game implements Runnable {
 	private void addElementsToScreen() {
 		renderer.add(new Background());
 		renderer.add(snake);
+		renderer.add(food);
 	}
 	
 	@Override
@@ -34,7 +38,8 @@ public class Game implements Runnable {
 		do {
 			gameWindow.repaint();
 			snake.move();
-			GameUtils.sleep(30);
+			food.checkifEaten(snake, gameWindow.getDrawingArea());
+			GameUtils.sleep(Constants.SLEEP_TIME);
 			
 		} while (!isGameOver());
 		
@@ -60,12 +65,18 @@ public class Game implements Runnable {
      int areaY2=(int)drawingArea.getMaxY();
      
      if(headX <=areaX1 ||headX+Constants.SNAKE_PIECE_SIZE>=areaX2) {
-    	 
+    	 return true;
      }
      if(headX <=areaY1 ||headY+Constants.SNAKE_PIECE_SIZE>=areaY2) {
-	}
-     return false;
-}
+    	 return true;
+     }
+     
+	
+	
+	return false;
+     
+     }
+	
   }
      
 	

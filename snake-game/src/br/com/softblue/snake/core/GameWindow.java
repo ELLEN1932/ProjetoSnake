@@ -52,7 +52,7 @@ public class GameWindow extends JFrame implements KeyListener {
 	}
 	
 	   private void defineDrawingArea() {
-		  int upperY=(int)Constants.WINDOW_HEIGHT-getContentPane().getSize().getHeight());
+		  int upperY=(int) (Constants.WINDOW_HEIGHT - getContentPane().getSize().getHeight());
 	      drawingArea=new Rectangle(0,upperY,Constants.WINDOW_WIDTH,Constants.WINDOW_HEIGHT-upperY);
 	   }
 	   

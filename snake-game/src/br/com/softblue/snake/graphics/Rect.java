@@ -8,6 +8,10 @@ import java.awt.Rectangle;
 public class Rect extends Drawable {
 	private Rectangle rectangle;
 	
+	public Rect() {
+		this.rectangle=new Rectangle(0,0);
+	}
+	
 	public Rect(Point location, Dimension dimension) {
 		this.rectangle = new Rectangle(location, dimension);
 	}
@@ -19,10 +23,18 @@ public class Rect extends Drawable {
 	public Point getLocation() {
 		return rectangle.getLocation();
 	}
+	public void setLocation(Point location) {
+		rectangle.setLocation(location);
+	}		
 
 	public Dimension getDimension() {
 		return rectangle.getSize();
 	}
+	public void setDimension(Dimension dimension){
+	  rectangle.setSize(dimension);
+	}
+		
+
 	
 	public boolean intersects(Rect other) {
 		return rectangle.intersects(other.rectangle);
