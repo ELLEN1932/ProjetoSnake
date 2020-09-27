@@ -29,7 +29,9 @@ public class Shape extends Drawable {
 	}
 	
 	public void addRect(Rect rect) {
+		rect.setColor(getColor());
 		rects.add(rect);
+		
 	}
 	
 	public Rect duplicateRect(Rect baseRect, Direction direction) {
