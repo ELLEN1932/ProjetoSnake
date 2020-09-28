@@ -1,14 +1,18 @@
 package br.com.softblue.snake.core;
 
+import java.awt.Point;
 import java.awt.Rectangle;
 
 import br.com.softblue.snake.graphics.Food;
 import br.com.softblue.snake.graphics.Rect;
 import br.com.softblue.snake.graphics.Renderer;
 import br.com.softblue.snake.scene.Background;
+
+import br.com.softblue.snake.scene.GameOverText;
 import br.com.softblue.snake.scene.Snake;
 import br.com.softblue.snake.util.Constants;
 import br.com.softblue.snake.util.GameUtils;
+
 
 public class Game implements Runnable {
 	private GameWindow gameWindow;
@@ -31,6 +35,8 @@ public class Game implements Runnable {
 		renderer.add(new Background());
 		renderer.add(snake);
 		renderer.add(food);
+		renderer.add(new GameOverText());
+		gameWindow.repaint();
 	}
 	
 	@Override
@@ -43,11 +49,23 @@ public class Game implements Runnable {
 			
 		} while (!isGameOver());
 		
-		gameWindow.dispose();
+		processGameOver();
+			
 	}
-	
+			
+		
+		
+		
+		
 	private boolean isGameOver() {
 		return snake.collidesWithItself()||isSnakeHitBounds();
+	}
+	
+	private void processGameOver() {
+		renderer.remove(snake);
+		renderer.remove(food);
+		renderer.add(new GameOverText());
+		
 	}
 
 	private boolean isSnakeHitBounds() {
