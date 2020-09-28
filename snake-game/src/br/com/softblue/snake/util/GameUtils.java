@@ -1,7 +1,6 @@
 package br.com.softblue.snake.util;
 
 import java.util.List;
-import java.util.Random;
 
 import br.com.softblue.snake.graphics.Rect;
 

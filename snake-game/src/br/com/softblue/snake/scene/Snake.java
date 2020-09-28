@@ -12,6 +12,7 @@ import br.com.softblue.snake.util.GameUtils;
 public class Snake extends Shape {
 
 	private Direction direction;
+	private int piecesToElongate;
 
 	public Snake() {
 		super(Constants.SNAKE_COLOR);
@@ -27,22 +28,28 @@ public class Snake extends Shape {
 			addRect(rect);
 		}
 	}
-	
+
 	public void move() {
 		if (direction != Direction.NONE) {
 			Rect head = getFirstRect();
-			//Rect tail = getLastRect();
-			
+			Rect tail = getLastRect();
+
 			GameUtils.moveRects(getRects());
-			
+
 			Rect newHead = duplicateRect(head, direction);
 			getRects().set(0, newHead);
+			
+			if (piecesToElongate > 0) {
+				getRects().add(tail);
+				piecesToElongate--;
+			}
 		}
-		
+
 	}
-	   public void elongate() {
-		   
-	   }
+
+	public void elongate() {
+		piecesToElongate = Constants.SNAKE_ELONGATE_PIECES;
+	}
 
 	public synchronized void left() {
 		if (direction.canChangeTo(Direction.LEFT)) {
@@ -67,16 +74,16 @@ public class Snake extends Shape {
 			direction = Direction.DOWN;
 		}
 	}
-	
+
 	public boolean collidesWithItself() {
 		Rect head = getFirstRect();
-		
+
 		for (int i = 1; i < getRects().size(); i++) {
 			if (head.intersects(getRects().get(i))) {
 				return true;
 			}
 		}
-		
+
 		return false;
 	}
 }

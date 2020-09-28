@@ -42,9 +42,10 @@ public class Food extends Rect {
 			eatenTimes++;
 			setRandomLocation(snake, drawingArea);
 			snake.elongate();
-		}
+			}
+		
 	}
-	
+	       
 	public int getEatenTimes() {
 		return eatenTimes;
 	}
